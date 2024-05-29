@@ -5,6 +5,7 @@ from rest_framework import viewsets , status
 from rest_framework.response import Response
 from . models import Product , Review
 from . serializer import ProductSerializer , ReviewSerializer
+from django.contrib.auth.models import User
 
 
 class Product_Viewset(viewsets.ModelViewSet):
@@ -18,7 +19,8 @@ class Product_Viewset(viewsets.ModelViewSet):
     def rate_product(self , request , slug = None):
         if 'rating' in request.data:
             product = Product.objects.get(slug = slug)
-            user = request.user
+            username = request.data['username']
+            user = User.objects.get(username = username)
             stars = request.data['rating']
             comment = request.data['comment']
             try:
