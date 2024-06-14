@@ -8,7 +8,7 @@ from django.dispatch import receiver
 
 
 class Profile(models.Model):
-    name = models.ForeignKey(User , on_delete=models.CASCADE)
+    name = models.OneToOneField(User , on_delete=models.CASCADE)
     image = models.ImageField(upload_to=None, height_field=None, width_field=None, max_length=None)
     phone = models.CharField(max_length=50)
 
